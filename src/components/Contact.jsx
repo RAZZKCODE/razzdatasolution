@@ -1,46 +1,4 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-
-const Contact = () => {
-  return (
-    <section id="contact" className="py-24 relative bg-[#0A192F]">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center"
-        >
-          <h2 className="text-4xl font-bold mb-4 font-sans text-white">
-            Ready to <span className="text-gradient">Automate?</span>
-          </h2>
-          <p className="text-gray-400 mb-10 text-lg">
-            Let's discuss how we can turn your manual complexity into automated simplicity.
-          </p>
-          
-          <form className="glass-card p-8 rounded-2xl max-w-2xl mx-auto text-left border border-white/10">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-              <div>
-                <label className="block text-sm font-mono text-gray-400 mb-2">Name</label>
-                <input type="text" className="w-full bg-[#040B16]/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors" placeholder="John Doe" />
-              </div>
-              <div>
-                <label className="block text-sm font-mono text-gray-400 mb-2">Email</label>
-                <input type="email" className="w-full bg-[#040B16]/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors" placeholder="john@example.com" />
-              </div>
-            </div>
-            <div className="mb-6">
-              <label className="block text-sm font-mono text-gray-400 mb-2">Project Details</label>
-              <textarea rows="4" className="w-full bg-[#040B16]/50 border border-white/10 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-primary transition-colors resize-none" placeholder="Tell me about your workflow..."></textarea>
-            </div>
-            <button type="button" className="w-full py-4 bg-primary text-[#040B16] font-bold rounded-lg hover:bg-[#00E5FF]/80 transition-colors shadow-[0_0_15px_rgba(0,229,255,0.3)]">
-              Send Message
-            </button>
-          </form>
-        </motion.div>
-      </div>
-    </section>
-  );
-};
-
+import React, { useState } from 'react';
+import { CheckCircle2, Mail, Send } from 'lucide-react';
+const Contact = () => { const [sent, setSent] = useState(false); const handleSubmit = (event) => { event.preventDefault(); setSent(true); event.currentTarget.reset(); }; return <section id="contact" className="section-shell contact-section"><div className="contact-layout"><div><span className="section-tag">Start a conversation</span><h2 className="display-title">Have an idea? <span className="text-gradient">Let's build it.</span></h2><p className="text-muted text-lg leading-relaxed mt-6 max-w-lg">Whether it is a full-stack application, custom business tool, automation workflow, data platform, or API integration, RazzDataSolution can turn the idea into a working digital product.</p><a className="contact-email" href="mailto:hello@razzdatasolution.com"><Mail className="w-4 h-4" /> hello@razzdatasolution.com</a></div><form onSubmit={handleSubmit} className="contact-form"><div className="form-grid"><label>Name<input required name="name" placeholder="Your name" /></label><label>Email<input required type="email" name="email" placeholder="you@company.com" /></label></div><div className="form-grid"><label>Company / Organization<input name="company" placeholder="Company name" /></label><label>Project Type<select name="type" defaultValue=""><option value="" disabled>Select a focus</option><option>Full-stack application</option><option>Custom software</option><option>Data automation</option><option>API or integration</option><option>Dashboard or analytics</option></select></label></div><label>Project Description<textarea required name="description" rows="4" placeholder="What are you trying to build or improve?" /></label><label>Budget Range<select name="budget" defaultValue=""><option value="" disabled>Choose a range</option><option>Not sure yet</option><option>Under $5k</option><option>$5k - $15k</option><option>$15k+</option></select></label><button className="button-primary" type="submit">{sent ? <><CheckCircle2 className="w-4 h-4" /> Request received</> : <>Submit Project Request <Send className="w-4 h-4" /></>}</button></form></div></section>; };
 export default Contact;

@@ -1,26 +1,4 @@
-import React from 'react';
-
-const icons = [
-  "Python", "Node.js", "React", "n8n", "Selenium", "Playwright", "Django", "MongoDB", "PostgreSQL", "Google Apps Script"
-];
-
-const TechMarquee = () => {
-  return (
-    <div className="w-full bg-[#0A192F] py-8 border-y border-white/10 overflow-hidden flex relative">
-      <div className="absolute left-0 w-20 h-full bg-gradient-to-r from-[#040B16] to-transparent z-10 pointer-events-none"></div>
-      <div className="absolute right-0 w-20 h-full bg-gradient-to-l from-[#040B16] to-transparent z-10 pointer-events-none"></div>
-      
-      <div className="flex animate-marquee whitespace-nowrap">
-        {/* Render twice for continuous loop */}
-        {[...icons, ...icons].map((tech, index) => (
-          <div key={index} className="mx-8 flex items-center gap-3 opacity-60 hover:opacity-100 transition-opacity">
-             <div className="w-2 h-2 rounded-full bg-primary"></div>
-             <span className="text-xl font-mono text-white font-bold tracking-wider">{tech}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
-
+import React, { useState } from 'react';
+import { PORTFOLIO_DATA } from '../data';
+const TechMarquee = () => { const [active, setActive] = useState(PORTFOLIO_DATA.tech_stack[0].category); const selected = PORTFOLIO_DATA.tech_stack.find((group) => group.category === active); return <section id="technology" className="section-shell technology-section"><div className="section-heading"><div><span className="section-tag">The engineering stack</span><h2 className="display-title">Built to be <span className="text-gradient">useful.</span></h2></div><p>Practical tools, chosen for the job. The stack stays flexible while the product stays clear.</p></div><div className="tech-layout"><div className="tech-tabs">{PORTFOLIO_DATA.tech_stack.map((group, index) => <button key={group.category} className={active === group.category ? 'tech-tab active' : 'tech-tab'} onClick={() => setActive(group.category)}><span>0{index + 1}</span>{group.category}</button>)}</div><div className="tech-panel"><div className="tech-panel-top"><span>selected_layer</span><span className="text-primary">{selected.category.toLowerCase().replaceAll(' ', '_')}</span></div><div className="tech-tags">{selected.tools.map((tool) => <span key={tool} className="tech-tag">{tool}</span>)}</div><div className="tech-panel-note">A considered foundation for clean interfaces, dependable services, and data that can move with the business.</div></div></div></section>; };
 export default TechMarquee;
